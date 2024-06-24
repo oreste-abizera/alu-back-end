@@ -6,13 +6,15 @@ import csv
 import requests
 from sys import argv
 
+
 def get_employee_info(employee_id):
     """
     Get employee information by employee ID
     """
-    url = f'https://jsonplaceholder.typicode.com/users/{employee_id}/'
+    url = f'https://jsonplaceholder.typicode.com/users/{employee_id}'
     response = requests.get(url)
     return response.json()
+
 
 def get_employee_todos(employee_id):
     """
@@ -22,6 +24,7 @@ def get_employee_todos(employee_id):
     response = requests.get(url)
     return response.json()
 
+
 def export_to_csv(employee_id, username, todos):
     """
     Export TODO list to a CSV file
@@ -30,7 +33,9 @@ def export_to_csv(employee_id, username, todos):
     with open(filename, mode='w') as file:
         file_writer = csv.writer(file, delimiter=',', quoting=csv.QUOTE_ALL)
         for todo in todos:
-            file_writer.writerow([employee_id, username, todo['completed'], todo['title']])
+            rowData = [employee_id, username, todo['completed'], todo['title']]
+            file_writer.writerow(rowData)
+
 
 def main(employee_id):
     """
@@ -42,6 +47,7 @@ def main(employee_id):
     todos = get_employee_todos(employee_id)
 
     export_to_csv(employee_id, username, todos)
+
 
 if __name__ == "__main__":
     if len(argv) > 1:

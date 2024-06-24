@@ -6,6 +6,7 @@ import json
 import requests
 import sys
 
+
 def get_employee_info(employee_id):
     """
     Get employee information by employee ID
@@ -13,6 +14,7 @@ def get_employee_info(employee_id):
     url = f"https://jsonplaceholder.typicode.com/users/{employee_id}"
     response = requests.get(url)
     return response.json()
+
 
 def get_employee_todos(employee_id):
     """
@@ -22,6 +24,7 @@ def get_employee_todos(employee_id):
     response = requests.get(url)
     return response.json()
 
+
 def export_to_json(employee_id, todos):
     """
     Export TODO list to a JSON file
@@ -29,6 +32,7 @@ def export_to_json(employee_id, todos):
     filename = f"{employee_id}.json"
     with open(filename, "w") as file:
         json.dump({employee_id: todos}, file)
+
 
 def main(employee_id):
     """
